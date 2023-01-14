@@ -84,13 +84,13 @@ export class GameLogic {
     public switchToCardIndex(cardData: number): number;
     public switchToCardIndex(cardData: number[], cardIndex: number[]): void;
     public switchToCardIndex(cardData: number | number[], cardIndex?: number[]) {
-        if (Array.isArray(cardData)) {
+        if (!Array.isArray(cardData)) {
+            return (this.getColor(cardData) * 9 + this.getValue(cardData) - 1);
+        }
+        if (Array.isArray(cardData) && cardIndex) {
             cardData.forEach(card => {
                 cardIndex[this.switchToCardIndex(card)]++;
             });
-            return;
-        } else {
-            return (this.getColor(cardData) * 9 + this.getValue(cardData) - 1);
         }
     }
 
