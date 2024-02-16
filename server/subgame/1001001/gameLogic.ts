@@ -1,6 +1,7 @@
-import { HU, INVALID_INDEX, WeaveItem, MASK_COLOR, MASK_VALUE, WIK, RED_INDEX, hasRule, AnalyzeItem, MAX_WEAVE, MAX_COUNT, KindItem, MAX_INDEX } from '../define';
+import { GameLogic } from '../gameLogic';
+import { HU, INVALID_INDEX, WeaveItem, MASK_COLOR, MASK_VALUE, WIK, RED_INDEX, hasRule, AnalyzeItem, MAX_WEAVE, MAX_COUNT, KindItem, MAX_INDEX } from './define';
 
-export class GameLogic {
+export class GameLogic1001001 extends GameLogic {
 
     rules: number[] = [];
 
@@ -32,6 +33,7 @@ export class GameLogic {
 
     // private testInfo: TestInfo;
     constructor() {
+        super();
         this.extraCardIndex.push(this.switchToCardIndex(0x31));
         this.extraCardIndex.push(this.switchToCardIndex(0x32));
         this.extraCardIndex.push(this.switchToCardIndex(0x33));
@@ -311,7 +313,7 @@ export class GameLogic {
             // }
             // 七对
             if (this.is7Dui(allCardIdx)) {
-                let cnt4 = GameLogic.get4Cnt(allCardIdx);
+                let cnt4 = this.get4Cnt(allCardIdx);
 
                 // let double_seven = [HU.QI_DUI, HU.HAO_QI, HU.HAO_QI_2, HU.HAO_QI_3]
                 let double_seven = [HU.QI_DUI, HU.HAO_QI, HU.HAO_QI, HU.HAO_QI]
@@ -419,7 +421,7 @@ export class GameLogic {
         return true;
     }
 
-    private static get4Cnt(cardIndex: number[]): number {
+    private get4Cnt(cardIndex: number[]): number {
         let cnt4 = 0
         for (let cnt of cardIndex) {
             if (cnt == 4) cnt4++;
@@ -427,7 +429,7 @@ export class GameLogic {
         return cnt4;
     }
 
-    private static isQuanQiuRen(weaveItem: WeaveItem[]): boolean {
+    private isQuanQiuRen(weaveItem: WeaveItem[]): boolean {
         if (weaveItem.length != 4) return false;
         for (let item of weaveItem) {
             if (item.weaveKind == WIK.GANG && item.public == false) return false;

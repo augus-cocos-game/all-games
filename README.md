@@ -1,4 +1,4 @@
-# Mahjong
+# ALL GAMES
 
 我的客户端呢？客户端呢？客户端呢？
 
